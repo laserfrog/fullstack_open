@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import PhoneBookService from './services/phonebook'
 
 const ShowName = ({ name, number }) => (
   <>
@@ -36,10 +36,14 @@ const App = () => {
   const [newSearch, setNewSearch] = useState('')
 
   const getJsonDataHook = () => {
-    axios
-      .get('http://localhost:3001/persons')
+    // axios
+    //   .get('http://localhost:3001/persons')
+    //   .then(response => {
+    //     setPersons(response.data)
+    //   })
+    PhoneBookService.getPhonebook()
       .then(response => {
-        setPersons(response.data)
+        setPersons(response)
       })
   }
 
@@ -63,9 +67,20 @@ const App = () => {
     if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
       alert(`${newName} is already added to the phonebook`)
     } else {
-      setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
+      // axios
+      //   .post('http://localhost:3001/persons', nameObject)
+      //   .then(response => {
+      //     setPersons(persons.concat(nameObject))
+      //     setNewName('')
+      //     setNewNumber('')
+      PhoneBookService.create(nameObject)
+        .then(response => {
+          setPersons(persons.concat(nameObject))
+          setNewName('')
+          setNewNumber('')
+        })
+
+
     }
   }
 
