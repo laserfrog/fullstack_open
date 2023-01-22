@@ -11,4 +11,14 @@ const create = newObject => {
     return request
 }
 
-export default { getPhonebook, create }
+const removeEntry = (id) => {
+    const remove = axios.delete(`http://localhost:3001/persons/${id}`)
+    return remove
+}
+
+const editEntry = (oldObj, newObj) => {
+    const edit = axios.put(`http://localhost:3001/persons/${oldObj.id}`, newObj)
+    return edit
+}
+
+export default { getPhonebook, create, removeEntry, editEntry }

@@ -1,9 +1,10 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import PhoneBookService from './services/phonebook'
 
-const ShowName = ({ name, number }) => (
+const ShowName = ({ name, number, buttonClick }) => (
   <>
-    <li>{name}: {number}</li>
+    <li>{name}: {number} <button key={number} onClick={buttonClick}>delete</button> </li>
   </>
 )
 
@@ -65,7 +66,19 @@ const App = () => {
     event.preventDefault()
     const nameObject = { name: newName, number: newNumber, id: persons.length + 1 }
     if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
-      alert(`${newName} is already added to the phonebook`)
+      if (window.confirm(`${newName} is already in the phonebook do you want to update the phone number?`)) {
+        const oldObject = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+        const newObject = { ...oldObject, number: newNumber }
+        // axios.put(`http://localhost:3001/persons/${oldObject.id}`, newObject)
+        PhoneBookService.editEntry(oldObject, newObject)
+          .then(response => {
+            alert('phone number updated')
+            console.log(response.data)
+            setPersons(persons.map(person => person.id !== response.data.id ? person : response.data))
+
+          })
+      }
+      // alert(`${newName} is already added to the phonebook`)
     } else {
       // axios
       //   .post('http://localhost:3001/persons', nameObject)
@@ -84,6 +97,16 @@ const App = () => {
     }
   }
 
+  const deleteNameNumber = (id) => {
+    console.log(id)
+    if (window.confirm("Do you want to delete this entry?")) {
+      // axios.delete(`http://localhost:3001/persons/${id}`)
+      PhoneBookService.removeEntry(id)
+        .then(setPersons(persons.filter(person => person.id !== id)))
+    }
+
+  }
+
   const showPeople = newSearch
     ? persons.filter(person => person.name.toLowerCase() === newSearch.toLowerCase()) : persons
 
@@ -94,8 +117,13 @@ const App = () => {
       <PeopleForm onSubmit={addNameNumber} newName={newName}
         handleNameInput={handleNameInput} newNumber={newNumber} handleNumberInput={handleNumberInput} />
       <h2>Numbers</h2>
-      {showPeople.map(person =>
-        <ShowName key={person.name} name={person.name} number={person.number}></ShowName>)}
+
+      {showPeople.map(person => (
+
+        <ShowName key={person.name} name={person.name} number={person.number} buttonClick={() => deleteNameNumber(person.id)}>
+        </ShowName>
+
+      ))}
 
     </div>
   )

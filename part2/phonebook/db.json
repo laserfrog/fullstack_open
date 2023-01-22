@@ -7,7 +7,7 @@
     },
     {
       "name": "Ada Lovelace",
-      "number": "39-44-5323523",
+      "number": "12345678",
       "id": 2
     },
     {
@@ -22,23 +22,13 @@
     },
     {
       "name": "Barry Bollocksby",
-      "number": "650-325466",
+      "number": "1-800-Barry",
       "id": 5
     },
     {
-      "name": "Roy Royson",
-      "number": "1-800-ROY",
-      "id": 6
-    },
-    {
       "name": "Leo",
-      "number": "231231241",
-      "id": 7
-    },
-    {
-      "name": "Tony Tonyson",
-      "number": "1-800-Tony",
-      "id": 8
+      "number": "654565",
+      "id": 6
     }
   ]
 }
