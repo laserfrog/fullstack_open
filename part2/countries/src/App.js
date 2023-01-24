@@ -60,6 +60,7 @@ const App = () => {
   if (countries.length === 1) {
 
     const languages = Object.values(countries[0].languages)
+    const langy = languages.length > 1
     return (
       <>
         Countries
@@ -68,7 +69,7 @@ const App = () => {
         <br></br>
         Capital City: {countries[0].capital}
         <p></p>Area: {countries[0].area}
-        <h3>languages:</h3>
+        <h3>{langy ? 'languages' : 'language'}:</h3>
         {languages.map(lang => <li key={lang}>{lang}</li>)}
         <img src={countries[0].flags.png}></img>
       </>
@@ -80,7 +81,7 @@ const App = () => {
       Countries
       <Search name={''} change={handleSearch} />
       {countries.map(country => (
-        <CountryNames key={country.name.common} name={country.name.common} onClick={() => setSearch(country.name.common)} />))}
+        <CountryNames key={country.name.common} name={country.name.common} onClick={() => setSearch(country.name.official)} />))}
     </>
   )
 }
