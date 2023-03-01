@@ -5,6 +5,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const { response } = require('express')
 const blogsRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
 require('dotenv').config()
 require('express-async-errors')
 
@@ -17,6 +18,7 @@ const mongoUrl = process.env.NODE_ENV === 'test'
     : process.env.MONGODB_URL
 mongoose.connect(mongoUrl)
 app.use('/api/blogs', blogsRouter)
+app.use('/api/users', usersRouter)
 app.use(cors())
 app.use(express.json())
 
