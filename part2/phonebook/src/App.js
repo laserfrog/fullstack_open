@@ -102,6 +102,15 @@ const App = () => {
           setNewNumber('')
           setTimeout(() => { setErrorMessage({ ...errorMessage, message: null }) }, 3000)
         })
+        .catch(error => {
+          // setErrorMessage({ message: error, type: "error" })
+          if (error.response) {
+            console.log(error.response.data)
+            setErrorMessage({ message: error.response.data, type: "error" })
+            setTimeout(() => { setErrorMessage({ ...errorMessage, message: null }) }, 3000)
+          }
+
+        })
 
     }
   }

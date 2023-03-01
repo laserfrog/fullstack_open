@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = '/api/persons'
 
 const getPhonebook = () => {
     const request = axios.get(baseUrl)
@@ -12,12 +12,12 @@ const create = newObject => {
 }
 
 const removeEntry = (id) => {
-    const remove = axios.delete(`http://localhost:3001/persons/${id}`)
+    const remove = axios.delete(`/api/persons/${id}`)
     return remove
 }
 
 const editEntry = (oldObj, newObj) => {
-    const edit = axios.put(`http://localhost:3001/persons/${oldObj.id}`, newObj)
+    const edit = axios.put(`/api/persons/${oldObj.id}`, newObj)
     return edit
 }
 
