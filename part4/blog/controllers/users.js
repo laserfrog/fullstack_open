@@ -27,7 +27,8 @@ usersRouter.post('/', async (request, response) => {
 
 usersRouter.get('/', async (request, response) => {
 
-    response.json('hi')
+    const users = await User.find({}).populate('blogs', { title: 1, author: 1 })
+    response.json(users)
 })
 
 module.exports = usersRouter
