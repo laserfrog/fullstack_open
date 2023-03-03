@@ -1,10 +1,11 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvbm55IiwiaWQiOiI2M2ZmZGRiYmQ3Njc1OGE3NTQ4ZTBmMTkiLCJpYXQiOjE2Nzc4NDQ4NzR9.ynANzbKe1HzFbHz24Q9EVwxNTRvw07tlwcwr-kkmwUo
 
 {
-    "title": "Pies are nice",
+    "title": "Pies are still really nice",
     "author": "Ronny",
     "url": "t324",
-    "likes": 77,
-    "userId": "63ffddbbd76758a7548e0f19"
+    "likes": 77
+    
 }
